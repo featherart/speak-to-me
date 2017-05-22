@@ -1,0 +1,39 @@
+.app {
+  font-family: serif;
+}
+
+.app-header {
+  background-color: #222;
+  height: 75px;
+  padding: 20px;
+  color: white;
+  text-align: center;
+}
+
+.screenplay {
+  display: flex;
+  flex-direction: column;
+  font-family: Courier New,Courier,Lucida Sans Typewriter,Lucida Typewriter,monospace;
+  font-size: 20px;
+  padding: 20px 50px;
+  margin: 20px;
+  max-width: 800px;
+}
+
+.dialogue, .character {
+  margin-bottom: 20px;
+}
+
+.character {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.highlight {
+  background-color: #42f4f1;
+}
+
+.spacer {
+  width: 300px;
+}
