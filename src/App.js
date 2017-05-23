@@ -16,7 +16,7 @@ class App extends Component {
       characterTwoVoice: null,
       open1: false,
       open2: false,
-      playbackReady: true,
+      playbackReady: false,
       volumeA: null,
       volumeB: null,
       pitchA: null,
@@ -52,16 +52,10 @@ class App extends Component {
 
   handleVoiceChange(voice, character) {
     if (character === 1) {
-      this.setState({characterOneVoice: voice})
+      this.setState({ characterOneVoice: voice, playbackReady: true })
     } else {
-      this.setState({characterTwoVoice: voice})
+      this.setState({ characterTwoVoice: voice })
     }
-    if (this.state.characterTwoVoice && this.state.characterOneVoice) {
-      // show speak button
-      console.log('in here, reveal button')
-      this.setState({ playbackReady: true })
-    }
-    console.log('state now: ', this.state)
   }
 
   handleVolumeChange(volume, character) {
@@ -106,7 +100,11 @@ class App extends Component {
 
   pausePlayback() {
     // stop talking
-    //window.speechSynthesis.pause()
+    if (window.speechSynthesis.paused) {
+      window.speechSynthesis.resume()
+    } else {
+      window.speechSynthesis.pause()
+    }
   }
 
   render() {
@@ -136,6 +134,7 @@ class App extends Component {
                   onHide={this.handleClose.bind(this)} >
                   <Speak
                     character={1}
+                    currentVoiceA={this.state.characterOneVoice ? this.state.characterOneVoice.value : null}
                     voiceCallback={voice => this.handleVoiceChange(voice, 1)}
                     volCallback={volume => this.handleVolumeChange(volume, 1)}
                     rateCallback={rate => this.handleRateChange(rate, 1)}

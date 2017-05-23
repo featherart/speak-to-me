@@ -5,10 +5,11 @@ import 'react-select/dist/react-select.css'
 class Speak extends Component {
   constructor(props) {
     super(props)
+    console.log(this.props)
     this.state = {
       voices: [],
-      currentVoiceA: null,
-      currentVoiceB: null,
+      currentVoiceA: this.props.currentVoiceA || null,
+      currentVoiceB: this.props.currentVoiceB || null,
       volume: 1,
       pitch: 0.9,
       rate: 0.9,

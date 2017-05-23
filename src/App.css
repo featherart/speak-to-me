@@ -24,9 +24,9 @@ a:hover {
 
 .playback-controls {
   display: flex;
+  max-width: 50%;
   flex-direction: row;
   justify-content: flex-end;
-  padding: 0 50px;
 }
 
 .playback-button, .pause-button {
@@ -35,7 +35,7 @@ a:hover {
 }
 
 .playback-button:hover {
-  color: rgb(224, 92, 44);
+  color: rgba(66, 244, 83, 0.9);
 }
 
 .pause-button:hover {
