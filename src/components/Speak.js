@@ -7,7 +7,8 @@ class Speak extends Component {
     super(props)
     this.state = {
       voices: [],
-      currentVoice: null,
+      currentVoiceA: null,
+      currentVoiceB: null,
       clearable: true,
     }
   }
@@ -16,24 +17,23 @@ class Speak extends Component {
   	this.setState({voices: speechSynthesis.getVoices()})
   }
 
-  speak() {
-    const defaultOpts = {
-      volume: 1,
-      rate: 0.9,
-      pitch: 1,
-      lang: "en-GB"
-     }
-    // var voices = window.speechSynthesis.getVoices();
-    let msg = new SpeechSynthesisUtterance() // only accepts text to speak as param
-    Object.assign(msg, defaultOpts)
-
-  }
   onChange(e) {
     if (e) {
-      this.setState({
-        currentVoice: e.value,
-        clearable: true,
-      })
+      if (this.props.character === 1) {
+        this.setState({
+          currentVoiceA: e.value,
+        })
+        if (this.props.callback && typeof this.props.callback === 'function') {
+          this.props.callback({ voice: e.value })
+        }
+      } else {
+        this.setState({
+          currentVoiceB: e.value,
+        })
+        if (this.props.callback && typeof this.props.callback === 'function') {
+          this.props.callback({ voice: e.value })
+        }
+      }
     }
   }
 
@@ -47,7 +47,7 @@ class Speak extends Component {
           value: voice.lang,
           label: voice.name + ' ' + voice.lang,
         }))}
-        value={this.state.currentVoice}
+        value={this.state.currentVoiceA || this.state.currentVoiceB}
         clearable={this.state.clearable}
         onChange={e => this.onChange(e)}
       />
@@ -57,6 +57,5 @@ class Speak extends Component {
       </div>
    )
   }
-
 }
 export default Speak

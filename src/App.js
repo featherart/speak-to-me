@@ -10,9 +10,11 @@ class App extends Component {
     super(props)
     this.state = {
       characterHover: false,
-      character: 0,
+      characterOneVoice: null,
+      characterTwoVoice: null,
       open1: false,
       open2: false,
+      playbackReady: true,
     }
   }
   componentDidMount() {
@@ -39,6 +41,43 @@ class App extends Component {
     })
   }
 
+  handleVoiceChange(voice, character) {
+    if (character === 1) {
+      this.setState({characterOneVoice: voice})
+    } else {
+      this.setState({characterTwoVoice: voice})
+    }
+    if (this.state.characterTwoVoice && this.state.characterOneVoice) {
+      // show speak button
+      console.log('in here, reveal button')
+      this.setState({ playbackReady: true })
+    }
+    console.log('state now: ', this.state)
+  }
+
+  playPage() {
+    //playback the page with chosen voices
+    const defaultOpts = {
+      volume: 1,
+      rate: 0.9,
+      pitch: 1,
+      lang: this.state.characterOneVoice && this.state.characterOneVoice.voice,
+     }
+
+     let msg = new SpeechSynthesisUtterance() // only accepts text to speak as param
+     Object.assign(msg, defaultOpts)
+
+     // Set the text.
+   	 msg.text = this.refs.dialogueOne.innerText
+     window.speechSynthesis.speak(msg)
+
+     // Set the attributes.
+   // 	msg.volume = parseFloat(volumeInput.value);
+   // 	msg.rate = parseFloat(rateInput.value);
+   // 	msg.pitch = parseFloat(pitchInput.value);
+
+  }
+
   render() {
     return (
       <div className='app'>
@@ -50,7 +89,8 @@ class App extends Component {
             <div className='spacer'> </div>
             <div
               data-id='1'
-              className={(this.state.characterHover && this.state.character === 1) ? 'highlight' : ''}
+              ref='cindy'
+              className={(this.state.characterHover && this.state.character === 1) || this.state.characterOneVoice ? 'highlight' : ''}
               onClick={(e) => this.pickVoice(e)}>
               CINDERELLA
                 <a
@@ -64,19 +104,23 @@ class App extends Component {
                   target={this.refs.popover1}
                   show={this.state.open1}
                   onHide={this.handleClose.bind(this)} >
-                  <Speak />
+                  <Speak
+                    character={1}
+                    callback={voice => this.handleVoiceChange(voice, 1)}
+                  />
                 </Popover>
             </div>
             <div className='spacer'> </div>
           </div>
-          <div className='dialogue'>
+          <div className='dialogue' ref='dialogueOne'>
           My father was a baron, my mother a baroness. I'm of noble blood!
           </div>
           <div className='character'>
             <div className='spacer'> </div>
             <div
               data-id='2'
-              className={(this.state.characterHover && this.state.character === 2) ? 'highlight' : ''}
+              ref='mami'
+              className={(this.state.characterHover && this.state.character === 2) || this.state.characterTwoVoice ? 'highlight' : ''}
               onClick={(e) => this.pickVoice(e)}>
               MADEMOISELLE
               <a
@@ -90,7 +134,10 @@ class App extends Component {
                   target={this.refs.popover2}
                   show={this.state.open2}
                   onHide={this.handleClose.bind(this)} >
-                  <Speak />
+                  <Speak
+                    character={2}
+                    callback={voice => this.handleVoiceChange(voice, 2)}
+                   />
                 </Popover>
             </div>
             <div className='spacer'> </div>
@@ -140,6 +187,11 @@ class App extends Component {
           But, as God is my witness, I'm one of you.
           </div>
         </div>
+        { this.state.playbackReady ?
+          <button onClick={() => this.playPage()}>Play</button>
+          :
+          ''
+        }
       </div>
     );
   }
