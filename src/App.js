@@ -15,6 +15,12 @@ class App extends Component {
       open1: false,
       open2: false,
       playbackReady: true,
+      volumeA: 0.5,
+      volumeB: 0.5,
+      pitchA: null,
+      pitchB: null,
+      rateA: null,
+      rateB: null,
     }
   }
   componentDidMount() {
@@ -37,7 +43,7 @@ class App extends Component {
     e.preventDefault();
     this.setState({
       characterHover: !this.state.characterHover,
-      character: parseInt(e.target.dataset.id, 10)
+      character: parseInt(e.target.dataset.id, 10),
     })
   }
 
@@ -67,15 +73,8 @@ class App extends Component {
      let msg = new SpeechSynthesisUtterance() // only accepts text to speak as param
      Object.assign(msg, defaultOpts)
 
-     // Set the text.
    	 msg.text = this.refs.dialogueOne.innerText
      window.speechSynthesis.speak(msg)
-
-     // Set the attributes.
-   // 	msg.volume = parseFloat(volumeInput.value);
-   // 	msg.rate = parseFloat(rateInput.value);
-   // 	msg.pitch = parseFloat(pitchInput.value);
-
   }
 
   render() {
@@ -98,7 +97,6 @@ class App extends Component {
                   ref="popover1"
                   onClick={this.handleClick1.bind(this)}><MdCreate /></a>
                 <Popover
-                  className='popover'
                   placement='right'
                   container={this}
                   target={this.refs.popover1}
@@ -106,7 +104,8 @@ class App extends Component {
                   onHide={this.handleClose.bind(this)} >
                   <Speak
                     character={1}
-                    callback={voice => this.handleVoiceChange(voice, 1)}
+                    voiceCallback={voice => this.handleVoiceChange(voice, 1)}
+                    volCallback={volume => this.handleVolumeChange(volume, 1)}
                   />
                 </Popover>
             </div>

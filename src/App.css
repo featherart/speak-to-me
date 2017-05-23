@@ -3,10 +3,11 @@
 }
 
 .app-header {
-  background-color: #222;
-  height: 75px;
-  padding: 20px;
-  color: white;
+  background-color: #333;
+  font-family: Courier New,Courier,Lucida Sans Typewriter,Lucida Typewriter,monospace;
+  height: 55px;
+  padding: 10px;
+  color: #fff;
   text-align: center;
 }
 
@@ -14,11 +15,11 @@ a {
   color: #fff;
 }
 a:hover {
-  color: #f48941;
+  color: rgb(224, 92, 44);
 }
 
 .popover {
-  background: #000;
+  background-color: rgba(0, 0, 0, 0.8);
 }
 
 .screenplay {
@@ -42,9 +43,56 @@ a:hover {
 }
 
 .highlight {
-  background-color: #42f4f1;
+  background-color: rgba(32, 126, 135, 0.5);
 }
 
 .spacer {
   width: 300px;
+}
+
+.speech-form-container {
+  background-color: #333;
+  border-radius: 3px;
+  padding: 10px;
+  color: #fff;
+}
+
+.label {
+  font-size: 15px;
+  margin: 5px 0;
+  padding: 0 5px;
+  font-family: Helvetica Neue;
+  font-weight: 100;
+  color: #fff;
+}
+
+.controls {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.Select-placeholder, .Select-value, .Select-menu-outer {
+  background-color: rgb(32, 126, 135);
+  color: #fff;
+  font-size: 15px;
+  font-family: Helvetica Neue;
+}
+
+.Select-input, .Select-value-label {
+  color: #fff;
+  font-size: 15px;
+  font-family: Helvetica Neue;
+}
+
+.Select-control .Select-value .Select-value-label, .has-value.is-pseudo-focused.Select--single > .Select-control .Select-value .Select-value-label {
+  color: #fff;
+  font-size: 15px;
+  font-family: Helvetica Neue;
+}
+
+.has-value.Select--single > .Select-control .Select-value .Select-value-label, .has-value.is-pseudo-focused.Select--single > .Select-control .Select-value .Select-value-label {
+  color: #fff;
+  font-size: 15px;
+  font-family: Helvetica Neue;
 }
