@@ -7,7 +7,6 @@ import MdMovie from 'react-icons/lib/md/movie'
 import MdNavigateNext from 'react-icons/lib/md/navigate-next'
 import MdPeople from 'react-icons/lib/md/people'
 import MdLocationOn from 'react-icons/lib/md/location-on'
-
 import Popover from 'react-simple-popover'
 
 import './App.css'
@@ -300,7 +299,7 @@ class App extends Component {
           ''
         }
       </div>
-    );
+    )
   }
 }
 
