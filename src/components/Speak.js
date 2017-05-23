@@ -5,11 +5,10 @@ import 'react-select/dist/react-select.css'
 class Speak extends Component {
   constructor(props) {
     super(props)
-    console.log(this.props)
     this.state = {
       voices: [],
-      currentVoiceA: this.props.currentVoiceA || null,
-      currentVoiceB: this.props.currentVoiceB || null,
+      currentVoiceA: null,
+      currentVoiceB: null,
       volume: 1,
       pitch: 0.9,
       rate: 0.9,
@@ -84,7 +83,7 @@ class Speak extends Component {
         <Select
           placeholder='Select a voice'
           options={this.state.voices.map( voice => ({
-            value: voice.lang,
+            value: voice.lang || voice.name,
             label: voice.name + ' ' + voice.lang,
           }))}
           value={this.state.currentVoiceA || this.state.currentVoiceB}

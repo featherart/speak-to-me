@@ -3,6 +3,11 @@ import Speak from './components/Speak'
 import MdCreate from 'react-icons/lib/md/create'
 import MdPlayArrow from 'react-icons/lib/md/play-arrow'
 import MdPause from 'react-icons/lib/md/pause'
+import MdMovie from 'react-icons/lib/md/movie'
+import MdNavigateNext from 'react-icons/lib/md/navigate-next'
+import MdPeople from 'react-icons/lib/md/people'
+import MdLocationOn from 'react-icons/lib/md/location-on'
+
 import Popover from 'react-simple-popover'
 
 import './App.css'
@@ -54,7 +59,7 @@ class App extends Component {
     if (character === 1) {
       this.setState({ characterOneVoice: voice, playbackReady: true })
     } else {
-      this.setState({ characterTwoVoice: voice })
+      this.setState({ characterTwoVoice: voice, playbackReady: true })
     }
   }
 
@@ -82,20 +87,80 @@ class App extends Component {
     }
   }
 
-  playPage() {
-    //playback the page with chosen voices
-    const defaultOpts = {
+  playSnippet() {
+    // playback the page with chosen voices & options or defaults
+    // just assume this is speaker one & two; not a long term solution, obvs
+    const defaultOptsOne = {
       volume: this.state.volumeA ? parseFloat(this.state.volumeA) : 0.9,
       rate: this.state.rateA ? parseFloat(this.state.rateA) : 0.9,
       pitch: this.state.pitchA ? parseFloat(this.state.pitchA) : 0.9,
       lang: this.state.characterOneVoice && this.state.characterOneVoice.voice,
      }
 
-     let msg = new SpeechSynthesisUtterance() // only accepts text to speak as param
-     Object.assign(msg, defaultOpts)
+     const defaultOptsTwo = {
+       volume: this.state.volumeB ? parseFloat(this.state.volumeB) : 0.9,
+       rate: this.state.rateB ? parseFloat(this.state.rateB) : 0.9,
+       pitch: this.state.pitchB ? parseFloat(this.state.pitchB) : 0.9,
+       lang: this.state.characterTwoVoice && this.state.characterTwoVoice.voice,
+      }
 
-   	 msg.text = this.refs.dialogueOne.innerText
-     window.speechSynthesis.speak(msg)
+     let msgOne = new SpeechSynthesisUtterance()
+     Object.assign(msgOne, defaultOptsOne)
+
+     let msgTwo = new SpeechSynthesisUtterance()
+     Object.assign(msgTwo, defaultOptsTwo)
+
+     msgOne.text = this.refs.dialogueOne.innerText
+     window.speechSynthesis.speak(msgOne)
+
+     msgTwo.text = this.refs.dialogueTwo.innerText
+     window.speechSynthesis.speak(msgTwo)
+  }
+
+  playPage() {
+    // playback the page with chosen voices & options or defaults
+    // pause is buggy so it's hard to use and be able to playback again
+    // just assume this is speaker one & two; not a long term solution, obvs
+    const defaultOptsOne = {
+      volume: this.state.volumeA ? parseFloat(this.state.volumeA) : 0.9,
+      rate: this.state.rateA ? parseFloat(this.state.rateA) : 0.9,
+      pitch: this.state.pitchA ? parseFloat(this.state.pitchA) : 0.9,
+      lang: this.state.characterOneVoice && this.state.characterOneVoice.voice,
+     }
+
+     const defaultOptsTwo = {
+       volume: this.state.volumeB ? parseFloat(this.state.volumeB) : 0.9,
+       rate: this.state.rateB ? parseFloat(this.state.rateB) : 0.9,
+       pitch: this.state.pitchB ? parseFloat(this.state.pitchB) : 0.9,
+       lang: this.state.characterTwoVoice && this.state.characterTwoVoice.voice,
+      }
+
+     let msgOne = new SpeechSynthesisUtterance()
+     Object.assign(msgOne, defaultOptsOne)
+
+     let msgTwo = new SpeechSynthesisUtterance()
+     Object.assign(msgTwo, defaultOptsTwo)
+
+   	 msgOne.text = this.refs.dialogueOne.innerText
+     window.speechSynthesis.speak(msgOne)
+
+     msgTwo.text = this.refs.dialogueTwo.innerText
+     window.speechSynthesis.speak(msgTwo)
+
+     let msgThree = new SpeechSynthesisUtterance()
+     Object.assign(msgThree, defaultOptsOne)
+     msgThree.text = this.refs.dialogueThree.innerText
+     window.speechSynthesis.speak(msgThree)
+
+     let msgFour = new SpeechSynthesisUtterance()
+     Object.assign(msgFour, defaultOptsTwo)
+     msgFour.text = this.refs.dialogueFour.innerText
+     window.speechSynthesis.speak(msgFour)
+
+     let msgFive = new SpeechSynthesisUtterance()
+     Object.assign(msgFive, defaultOptsOne)
+     msgFive.text = this.refs.dialogueFive.innerText
+     window.speechSynthesis.speak(msgFive)
   }
 
   pausePlayback() {
@@ -111,21 +176,25 @@ class App extends Component {
     return (
       <div className='app'>
         <div className='app-header'>
-          <h2>Cinderella Must Die</h2>
+          <div className='title'>Cinderella Must Die</div>
+          <div className='explorer-panel'>
+            <MdMovie className='explorer-icon-movie' />
+            <MdPeople className='explorer-icon-cast' />
+            <MdLocationOn className='explorer-icon-location' />
+          </div>
         </div>
         <div className='screenplay'>
           <div className='character'>
             <div className='spacer'> </div>
             <div
               data-id='1'
-              ref='cindy'
               className={(this.state.characterHover && this.state.character === 1) || this.state.characterOneVoice ? 'highlight' : ''}
-              onClick={(e) => this.pickVoice(e)}>
+              onClick={e => this.pickVoice(e)}>
               CINDERELLA
                 <a
                   href="#"
                   ref="popover1"
-                  onClick={this.handleClick1.bind(this)}><MdCreate /></a>
+                  onClick={this.handleClick1.bind(this)}><MdCreate className='edit-icon' /></a>
                 <Popover
                   placement='right'
                   container={this}
@@ -151,14 +220,13 @@ class App extends Component {
             <div className='spacer'> </div>
             <div
               data-id='2'
-              ref='mami'
               className={(this.state.characterHover && this.state.character === 2) || this.state.characterTwoVoice ? 'highlight' : ''}
               onClick={(e) => this.pickVoice(e)}>
               MADEMOISELLE
               <a
                 href="#"
                 ref="popover2"
-                onClick={this.handleClick2.bind(this)}><MdCreate /></a>
+                onClick={this.handleClick2.bind(this)}><MdCreate className='edit-icon'/></a>
                 <Popover
                   className='popover'
                   placement='right'
@@ -168,13 +236,16 @@ class App extends Component {
                   onHide={this.handleClose.bind(this)} >
                   <Speak
                     character={2}
-                    callback={voice => this.handleVoiceChange(voice, 2)}
-                   />
+                    voiceCallback={voice => this.handleVoiceChange(voice, 2)}
+                    volCallback={volume => this.handleVolumeChange(volume, 2)}
+                    rateCallback={rate => this.handleRateChange(rate, 2)}
+                    pitchCallback={pitch => this.handlePitchChange(pitch, 2)}
+                  />
                 </Popover>
             </div>
             <div className='spacer'> </div>
           </div>
-          <div className='dialogue'>
+          <div className='dialogue' ref='dialogueTwo'>
           You fool. I <bold>know</bold> your mother.
           </div>
           <div className='character'>
@@ -188,7 +259,7 @@ class App extends Component {
             <div className='spacer'> </div>
           </div>
           <div className='spacer'> </div>
-          <div className='dialogue'>
+          <div className='dialogue' ref='dialogueThree'>
           She's not my mother! She's my stepmother. My father married her after my real mother died.
           </div>
           <div className='character'>
@@ -201,7 +272,7 @@ class App extends Component {
             </div>
             <div className='spacer'> </div>
           </div>
-          <div className='dialogue'>
+          <div className='dialogue' ref='dialogueFour'>
           You're telling tales. What about your sisters?
           </div>
           <div className='character'>
@@ -214,13 +285,14 @@ class App extends Component {
             </div>
             <div className='spacer'> </div>
           </div>
-          <div className='dialogue'>
-          They're not my sisters, they're my stepsisters. When my father dies they squandered my inheritance and force me into service.
+          <div className='dialogue' ref='dialogueFive'>
+          They're not my sisters, they're my stepsisters. When my father died they squandered my inheritance and force me into service.
           But, as God is my witness, I'm one of you.
           </div>
         </div>
         { this.state.playbackReady ?
           <div className='playback-controls'>
+            <MdNavigateNext className='snippet-button' onClick={() => this.playSnippet()} />
             <MdPlayArrow className='playback-button' onClick={() => this.playPage()} />
             <MdPause className='pause-button' onClick={() => this.pausePlayback()} />
           </div>

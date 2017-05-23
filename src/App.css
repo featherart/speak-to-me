@@ -8,14 +8,52 @@
   height: 55px;
   padding: 10px;
   color: #fff;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.title {
+  width: 80%;
   text-align: center;
+  justify-content: center;
+  align-items: center;
+  font-size: 25px;
+  font-weight: bold;
+}
+.explorer-panel {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+  width: 20%;
+  border: 2px solid #00A6ED;
+  padding: 10px 0px 15px 5px;
+  border-radius: 3px;
+}
+
+.explorer-icon-movie, .explorer-icon-cast, .explorer-icon-location {
+  margin: 0px 10px;
+  font-size: 25px;
+}
+
+.explorer-icon-movie:hover {
+  color: #F6511D;
+}
+
+.explorer-icon-cast:hover {
+  color: #FFB400;
+}
+
+.explorer-icon-location:hover {
+  color: #7FB800;
 }
 
 a {
   color: #fff;
 }
 a:hover {
-  color: rgb(224, 92, 44);
+  color: #FFB400;
 }
 
 .popover {
@@ -29,9 +67,13 @@ a:hover {
   justify-content: flex-end;
 }
 
-.playback-button, .pause-button {
+.playback-button, .pause-button, .snippet-button {
   font-size: 40px;
   color: #333;
+}
+
+.snippet-button:hover {
+  color: #FFB400;
 }
 
 .playback-button:hover {
@@ -63,7 +105,14 @@ a:hover {
 }
 
 .highlight {
-  background-color: rgba(32, 126, 135, 0.5);
+  background-color: #00A6ED;
+  padding: 5px;
+  border-radius: 3px;
+  width: 185px;
+}
+
+.edit-icon {
+  padding: 0 5px 5px 15px;
 }
 
 .spacer {
@@ -93,7 +142,7 @@ a:hover {
 }
 
 .Select-placeholder, .Select-value, .Select-menu-outer {
-  background-color: rgb(32, 126, 135);
+  background-color: #00A6ED;
   color: #fff;
   font-size: 15px;
   font-family: Helvetica Neue;
