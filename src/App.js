@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 //import Speak from './utils/Speak'
-//import ReactTooltip from 'react-tooltip'
 import './App.css';
 
 class App extends Component {
