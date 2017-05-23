@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
-//import Speak from './utils/Speak'
+import Speak from './components/Speak'
+import MdCreate from 'react-icons/lib/md/create';
+import Popover from 'react-simple-popover';
+
 import './App.css';
 
 class App extends Component {
@@ -8,14 +11,28 @@ class App extends Component {
     this.state = {
       characterHover: false,
       character: 0,
+      open1: false,
+      open2: false,
     }
   }
   componentDidMount() {
-    document.title = 'Scripted Demo'
+    document.title = 'Scripted Demo';
+  }
+
+  handleClick1(e) {
+    this.setState({open1: !this.state.open1});
+  }
+
+  handleClick2(e) {
+    this.setState({open2: !this.state.open2});
+  }
+
+  handleClose(e) {
+    this.setState({open1: false, open2: false});
   }
 
   pickVoice(e) {
-    e.preventDefault()
+    e.preventDefault();
     this.setState({
       characterHover: !this.state.characterHover,
       character: parseInt(e.target.dataset.id, 10)
@@ -29,7 +46,6 @@ class App extends Component {
           <h2>Cinderella Must Die</h2>
         </div>
         <div className='screenplay'>
-
           <div className='character'>
             <div className='spacer'> </div>
             <div
@@ -37,6 +53,19 @@ class App extends Component {
               className={(this.state.characterHover && this.state.character === 1) ? 'highlight' : ''}
               onClick={(e) => this.pickVoice(e)}>
               CINDERELLA
+                <a
+                  href="#"
+                  ref="popover1"
+                  onClick={this.handleClick1.bind(this)}><MdCreate /></a>
+                <Popover
+                  className='popover'
+                  placement='right'
+                  container={this}
+                  target={this.refs.popover1}
+                  show={this.state.open1}
+                  onHide={this.handleClose.bind(this)} >
+                  <Speak />
+                </Popover>
             </div>
             <div className='spacer'> </div>
           </div>
@@ -50,6 +79,19 @@ class App extends Component {
               className={(this.state.characterHover && this.state.character === 2) ? 'highlight' : ''}
               onClick={(e) => this.pickVoice(e)}>
               MADEMOISELLE
+              <a
+                href="#"
+                ref="popover2"
+                onClick={this.handleClick2.bind(this)}><MdCreate /></a>
+                <Popover
+                  className='popover'
+                  placement='right'
+                  container={this}
+                  target={this.refs.popover2}
+                  show={this.state.open2}
+                  onHide={this.handleClose.bind(this)} >
+                  <Speak />
+                </Popover>
             </div>
             <div className='spacer'> </div>
           </div>

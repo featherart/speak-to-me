@@ -4,7 +4,10 @@
   "private": true,
   "dependencies": {
     "react": "^15.5.4",
-    "react-dom": "^15.5.4"
+    "react-dom": "^15.5.4",
+    "react-icons": "^2.2.5",
+    "react-select": "^1.0.0-rc.4",
+    "react-simple-popover": "^0.2.0"
   },
   "devDependencies": {
     "react-scripts": "0.9.5"

@@ -10,6 +10,17 @@
   text-align: center;
 }
 
+a {
+  color: #fff;
+}
+a:hover {
+  color: #f48941;
+}
+
+.popover {
+  background: #000;
+}
+
 .screenplay {
   display: flex;
   flex-direction: column;
