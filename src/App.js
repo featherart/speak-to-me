@@ -15,8 +15,8 @@ class App extends Component {
       open1: false,
       open2: false,
       playbackReady: true,
-      volumeA: 0.5,
-      volumeB: 0.5,
+      volumeA: null,
+      volumeB: null,
       pitchA: null,
       pitchB: null,
       rateA: null,
@@ -61,12 +61,36 @@ class App extends Component {
     console.log('state now: ', this.state)
   }
 
+  handleVolumeChange(volume, character) {
+    if (character === 1) {
+      this.setState({ volumeA: volume.volume })
+    } else {
+      this.setState({ volumeB: volume.volume })
+    }
+  }
+
+  handleRateChange(rate, character) {
+    if (character === 1) {
+      this.setState({ rateA: rate.rate })
+    } else {
+      this.setState({ rateB: rate.rate })
+    }
+  }
+
+  handlePitchChange(pitch, character) {
+    if (character === 1) {
+      this.setState({ pitchA: pitch.pitch })
+    } else {
+      this.setState({ pitchB: pitch.pitch })
+    }
+  }
+
   playPage() {
     //playback the page with chosen voices
     const defaultOpts = {
-      volume: 1,
-      rate: 0.9,
-      pitch: 1,
+      volume: this.state.volumeA ? parseFloat(this.state.volumeA) : 0.9,
+      rate: this.state.rateA ? parseFloat(this.state.rateA) : 0.9,
+      pitch: this.state.pitchA ? parseFloat(this.state.pitchA) : 0.9,
       lang: this.state.characterOneVoice && this.state.characterOneVoice.voice,
      }
 
@@ -106,6 +130,8 @@ class App extends Component {
                     character={1}
                     voiceCallback={voice => this.handleVoiceChange(voice, 1)}
                     volCallback={volume => this.handleVolumeChange(volume, 1)}
+                    rateCallback={rate => this.handleRateChange(rate, 1)}
+                    pitchCallback={pitch => this.handlePitchChange(pitch, 1)}
                   />
                 </Popover>
             </div>
