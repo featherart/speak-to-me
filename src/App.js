@@ -1,9 +1,11 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
 import Speak from './components/Speak'
-import MdCreate from 'react-icons/lib/md/create';
-import Popover from 'react-simple-popover';
+import MdCreate from 'react-icons/lib/md/create'
+import MdPlayArrow from 'react-icons/lib/md/play-arrow'
+import MdPause from 'react-icons/lib/md/pause'
+import Popover from 'react-simple-popover'
 
-import './App.css';
+import './App.css'
 
 class App extends Component {
   constructor(props) {
@@ -21,10 +23,11 @@ class App extends Component {
       pitchB: null,
       rateA: null,
       rateB: null,
+      speaker: null,
     }
   }
   componentDidMount() {
-    document.title = 'Scripted Demo';
+    document.title = 'Scripted Demo'
   }
 
   handleClick1(e) {
@@ -99,6 +102,11 @@ class App extends Component {
 
    	 msg.text = this.refs.dialogueOne.innerText
      window.speechSynthesis.speak(msg)
+  }
+
+  pausePlayback() {
+    // stop talking
+    //window.speechSynthesis.pause()
   }
 
   render() {
@@ -213,7 +221,10 @@ class App extends Component {
           </div>
         </div>
         { this.state.playbackReady ?
-          <button onClick={() => this.playPage()}>Play</button>
+          <div className='playback-controls'>
+            <MdPlayArrow className='playback-button' onClick={() => this.playPage()} />
+            <MdPause className='pause-button' onClick={() => this.pausePlayback()} />
+          </div>
           :
           ''
         }

@@ -22,6 +22,26 @@ a:hover {
   background-color: rgba(0, 0, 0, 0.8);
 }
 
+.playback-controls {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  padding: 0 50px;
+}
+
+.playback-button, .pause-button {
+  font-size: 40px;
+  color: #333;
+}
+
+.playback-button:hover {
+  color: rgb(224, 92, 44);
+}
+
+.pause-button:hover {
+  color: red;
+}
+
 .screenplay {
   display: flex;
   flex-direction: column;
