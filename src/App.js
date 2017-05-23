@@ -32,8 +32,11 @@ class App extends Component {
 
           <div className='character'>
             <div className='spacer'> </div>
-            <div data-id='1' className={(this.state.characterHover && this.state.character === 1) ? 'highlight' : ''} onClick={(e) => this.pickVoice(e)}>
-            CINDERELLA
+            <div
+              data-id='1'
+              className={(this.state.characterHover && this.state.character === 1) ? 'highlight' : ''}
+              onClick={(e) => this.pickVoice(e)}>
+              CINDERELLA
             </div>
             <div className='spacer'> </div>
           </div>
@@ -42,8 +45,11 @@ class App extends Component {
           </div>
           <div className='character'>
             <div className='spacer'> </div>
-            <div data-id='2' className={(this.state.characterHover && this.state.character === 2) ? 'highlight' : ''} onClick={(e) => this.pickVoice(e)}>
-            MADEMOISELLE
+            <div
+              data-id='2'
+              className={(this.state.characterHover && this.state.character === 2) ? 'highlight' : ''}
+              onClick={(e) => this.pickVoice(e)}>
+              MADEMOISELLE
             </div>
             <div className='spacer'> </div>
           </div>
@@ -52,8 +58,11 @@ class App extends Component {
           </div>
           <div className='character'>
             <div className='spacer'> </div>
-            <div data-id='1' className={(this.state.characterHover && this.state.character === 1) ? 'highlight' : ''} onClick={(e) => this.pickVoice(e)}>
-            CINDERELLA
+            <div
+              data-id='1'
+              className={(this.state.characterHover && this.state.character === 1) ? 'highlight' : ''}
+              onClick={(e) => this.pickVoice(e)}>
+              CINDERELLA
             </div>
             <div className='spacer'> </div>
           </div>
@@ -63,8 +72,11 @@ class App extends Component {
           </div>
           <div className='character'>
             <div className='spacer'> </div>
-            <div data-id='2' className={(this.state.characterHover && this.state.character === 2) ? 'highlight' : ''} onClick={(e) => this.pickVoice(e)}>
-            MADEMOISELLE
+            <div
+              data-id='2'
+              className={(this.state.characterHover && this.state.character === 2) ? 'highlight' : ''}
+              onClick={(e) => this.pickVoice(e)}>
+              MADEMOISELLE
             </div>
             <div className='spacer'> </div>
           </div>
@@ -73,8 +85,11 @@ class App extends Component {
           </div>
           <div className='character'>
             <div className='spacer'> </div>
-            <div data-id='1' className={(this.state.characterHover && this.state.character === 1) ? 'highlight' : ''} onClick={(e) => this.pickVoice(e)}>
-            CINDERELLA
+            <div
+              data-id='1'
+              className={(this.state.characterHover && this.state.character === 1) ? 'highlight' : ''}
+              onClick={(e) => this.pickVoice(e)}>
+              CINDERELLA
             </div>
             <div className='spacer'> </div>
           </div>
