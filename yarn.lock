@@ -4278,7 +4278,6 @@ react-scripts@0.9.5:
   optionalDependencies:
     fsevents "1.0.17"
 
-<<<<<<< HEAD
 react-select@^1.0.0-rc.4:
   version "1.0.0-rc.4"
   resolved "https://registry.yarnpkg.com/react-select/-/react-select-1.0.0-rc.4.tgz#f28f3bab18196ff8f32337bb52ed015773c90663"
@@ -4293,14 +4292,6 @@ react-simple-popover@^0.2.0:
   resolved "https://registry.yarnpkg.com/react-simple-popover/-/react-simple-popover-0.2.0.tgz#d7c1cbdf2df1cd7b007fa1ad03ab4946b111f9d5"
   dependencies:
     react-overlays "^0.6.5"
-=======
-react-tooltip@^3.3.0:
-  version "3.3.0"
-  resolved "https://registry.yarnpkg.com/react-tooltip/-/react-tooltip-3.3.0.tgz#51c08ae0221075e2c43d83cd47fc78466612df7d"
-  dependencies:
-    classnames "^2.2.0"
-    prop-types "^15.5.8"
->>>>>>> 151dc2418f657266fa7f6960ed9b5d9057764cba
 
 react@^15.5.4:
   version "15.5.4"
